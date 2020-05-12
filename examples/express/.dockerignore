@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+
+.RData
+.Rhistory
+.Rprofile
+renv
+
+Dockerfile
+.dockerignore

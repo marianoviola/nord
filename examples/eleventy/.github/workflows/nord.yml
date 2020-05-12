@@ -1,0 +1,21 @@
+name: Exec R scripts and build Eleventy
+on:
+  push:
+    branches:
+    - master
+jobs:
+  nord:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup and install R packages
+        uses: r-lib/actions/setup-r@v1
+      - run: Rscript -e 'install.packages("remotes", repos = c(CRAN = "https://cran.stat.unipd.it/"))'
+      - run: Rscript -e 'remotes::install_github("rstudio/renv")'
+      - run: Rscript -e 'renv::restore()'
+      - name: Setup and run Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm run build:static

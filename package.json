@@ -1,0 +1,22 @@
+{
+  "name": "@marianoviola/nord",
+  "version": "0.1.0",
+  "description": "A proof of concept micro-library that can be used to execute R scripts from Node",
+  "main": "nord.js",
+  "bin": {
+    "nord-cli": "nord-cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "R",
+    "Node"
+  ],
+  "author": "Mariano Viola",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marianoviola/nord.git"
+  }
+}
