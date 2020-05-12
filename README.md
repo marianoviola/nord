@@ -102,7 +102,7 @@ const port = 3000;
 
 app.get("/", async (req, res) => {
   try {
-    const data = await run("./scripts/topten/topten.RR", ["json"]);
+    const data = await run("./scripts/topten/topten.R", ["json"]);
     console.log(data);
     res.json(data);
   } catch (err)  {
@@ -116,7 +116,7 @@ app.listen(port, () =>
 ```
 `examples/express/index.js`.
 
-You can run the Express example pulling and running the `Nord` Docker image from GitHub:
+You can run the Express example pulling and running the `Nord` Docker image from Docker Hub:
 
 ```bash
 $ docker pull marianoviola/nord
@@ -132,6 +132,3 @@ $ npx @marianoviola/nord json=./examples/eleventy/_data ./examples/eleventy/scri
 ```
 
 The first argument is composed by the output type expected from the script (eg. `JSON` or `CSV`) and the output path joined by the `=` character. The second argument is a the R script path followed by a list of arbitrary arguments that will be passed to the R script.
-
-
-
