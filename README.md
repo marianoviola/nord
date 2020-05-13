@@ -1,4 +1,8 @@
-# ❄️ Nord
+<p>
+  <img src="https://repository-images.githubusercontent.com/263383491/6e90ef00-9517-11ea-8d36-07bf6d0b4915"  alt="nord">
+</p>
+
+# Nord
 
 `Nord` is a proof of concept micro-libray that can be used to execute R scripts from Node.
 
