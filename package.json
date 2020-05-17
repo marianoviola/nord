@@ -7,7 +7,7 @@
     "nord-cli": "nord-cli.js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --collect-coverage"
   },
   "keywords": [
     "R",
