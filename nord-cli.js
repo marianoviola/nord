@@ -1,28 +1,19 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
 const { run } = require("./nord");
 
 const args = process.argv.slice(2);
+const [scriptPath, ...scriptArgs] = args;
 
-const [outputArgs, scriptPath, ...scriptArgs] = args;
-const [outputType, outputPath] = outputArgs.split("=");
-
-const scriptExt = path.extname(scriptPath);
-const scriptName = path.basename(scriptPath, scriptExt);
+if (args.length < 1) {
+  console.log(`Usage: nord-cli script-path [script-arguments ...] > [output]`) 
+  return;
+}
 
 run(scriptPath, scriptArgs)
-  .then(outputData => {
-    try {
-      fs.writeFileSync(
-        `${outputPath}/${scriptName}.${outputType}`,
-        outputData
-      );
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
+  .then(data => {
+    process.stdout.write(data);
   })
   .catch((err) => {
-    console.error(`Error: ${err}`);
+    process.stderr.write(err);
   });
