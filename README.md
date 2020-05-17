@@ -99,7 +99,7 @@ The workflow example above setups R using [GitHub Actions for the R language](ht
 
 ### Express
 
-`Nord` can be also used to exec R scripts at runtime using Express or any another Node web framework. It can be an alternative to [Plumber](https://www.rplumber.io/).
+`Nord` can be also used to exec R scripts at runtime using Express or any another Node web framework. It can be an alternative to [Plumber](https://www.rplumber.io/) in creating REST API using data coming from R scripts:
 
 ```js
 const express = require("express");
