@@ -7,7 +7,7 @@
     "nord-cli": "nord-cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "R",
@@ -18,5 +18,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marianoviola/nord.git"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.?(m)js?(x)"
+    ],
+    "moduleFileExtensions": [
+      "mjs",
+      "js"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }
