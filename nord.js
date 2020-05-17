@@ -6,7 +6,7 @@ const { spawn } = require("child_process");
  * @param  {Array<string>} args An array of arguments to pass to the R script.
  * @return {Promise<string>} The R script output decoded as UTF-8 string.
  */
-const run = (scriptPath, scriptArgs) => {
+const run = (scriptPath, scriptArgs = []) => {
   const child = spawn("Rscript", [scriptPath, ...scriptArgs]);
 
   return new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ const run = (scriptPath, scriptArgs) => {
     });
 
     child.stderr.on("data", (err) => {
-      reject(`Error: ${err}`);
+      reject(err.toString());
     });
   });
 };
