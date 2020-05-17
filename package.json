@@ -1,6 +1,6 @@
 {
   "name": "@marianoviola/nord",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A proof of concept micro-library that can be used to execute R scripts from Node",
   "main": "nord.js",
   "bin": {
