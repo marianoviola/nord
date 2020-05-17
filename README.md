@@ -4,7 +4,7 @@
 
 # Nord
 
-`Nord` is a proof of concept micro-libray that can be used to execute R scripts from Node.
+`Nord` is a proof of concept micro-library that can be used to execute R scripts from Node.
 
 ## Installation
 
@@ -32,7 +32,7 @@ run("./examples/eleventy/scripts/topten.R", ["json"])
 
 `run(scriptPath, scriptArgs)`
 
-Exec a R script.
+Executes a R script.
 
 ### Arguments
 
@@ -48,7 +48,7 @@ _(Promise\<string\>)_: The R script output decoded as `UTF-8` string.
 
 ### Eleventy
 
-`Nord` can be used to execute R scripts making their output available to a static site generator such as [Eleventy](https://www.11ty.dev). Eleventy allows to dinamically generate data at build time using [JavaScript data files](https://www.11ty.dev/docs/data-js/):
+`Nord` can be used to execute R scripts making their output available to a static site generator such as [Eleventy](https://www.11ty.dev). `Eleventy`, for example, allows to dynamically generate data at build time using [JavaScript data files](https://www.11ty.dev/docs/data-js/):
 
 ```js
 const { run } = require("@marianoviola/nord");
@@ -62,9 +62,13 @@ module.exports = async function () {
   }
 };
 ```
-`examples/eleventy/_data/topten.json`.
+`examples/eleventy/_data/topten.js`.
 
-To build Eleventy using `Nord` using GitHub Actions you can use a workflow like this:
+In the example above it is assumed that the R script is able to output a JSON string using for example [`cat()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cat) and [`jsonlite`](https://cran.r-project.org/web/packages/jsonlite/index.html).
+
+### Build Eleventy using GitHub Actions
+
+To execute R scripts using `nord` and then build `eleventy` using [GitHub Actions](https://github.com/features/actions) you can use a workflow like this:
 
 ```yaml
 name: Exec R scripts and build Eleventy
@@ -79,7 +83,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup and install R packages
         uses: r-lib/actions/setup-r@v1
-      - run: Rscript -e 'install.packages("remotes", repos = c(CRAN = "https://cran.stat.unipd.it/"))'
+      - run: Rscript -e 'install.packages("remotes", repos = c(CRAN = "https://cloud.r-project.org"))'
       - run: Rscript -e 'remotes::install_github("rstudio/renv")'
       - run: Rscript -e 'renv::restore()'
       - name: Setup and run Node
@@ -89,7 +93,7 @@ jobs:
       - run: npm install
       - run: npm run build
 ```
-`examples/eleventy/.github/workflows/topten.json`.
+`examples/eleventy/.github/workflows/nord.yml`.
 
 The workflow example above setups R using [GitHub Actions for the R language](https://github.com/r-lib/actions) and installs R packages using [`renv`](https://rstudio.github.io/renv/articles/renv.html) before running Node scripts.
 
@@ -120,7 +124,7 @@ app.listen(port, () =>
 ```
 `examples/express/index.js`.
 
-You can run the Express example pulling and running the `Nord` Docker image from Docker Hub:
+You can run the Express example pulling and running the [`nord` Docker image from Docker Hub](https://hub.docker.com/repository/docker/marianoviola/nord):
 
 ```bash
 $ docker pull marianoviola/nord
@@ -131,8 +135,12 @@ $ docker run --name nord -p 3000:3000 -d marianoviola/nord
 
 `Nord` can be used via CLI using `nord-cli` a simple wrapper around `nord.js`.
 
-```bash
-$ npx @marianoviola/nord json=./examples/eleventy/_data ./examples/eleventy/scripts/topten.R json
-```
+### Usage
 
-The first argument is composed by the output type expected from the script (eg. `JSON` or `CSV`) and the output path joined by the `=` character. The second argument is a the R script path followed by a list of arbitrary arguments that will be passed to the R script.
+`nord-cli script-path [script-arguments ...] > [output]`
+
+### Example
+
+```bash
+$ npx @marianoviola/nord ./examples/eleventy/scripts/topten.R json > ./examples/eleventy/_data/topten.json
+```
