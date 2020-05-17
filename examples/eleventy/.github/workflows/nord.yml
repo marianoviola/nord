@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup and install R packages
         uses: r-lib/actions/setup-r@v1
-      - run: Rscript -e 'install.packages("remotes", repos = c(CRAN = "https://cran.stat.unipd.it/"))'
+      - run: Rscript -e 'install.packages("remotes", repos = c(CRAN = "https://cloud.r-project.org"))'
       - run: Rscript -e 'remotes::install_github("rstudio/renv")'
       - run: Rscript -e 'renv::restore()'
       - name: Setup and run Node
